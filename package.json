@@ -1,0 +1,42 @@
+{
+  "name": "node-pre-gyp-hosting-github",
+  "version": "0.1.0",
+  "description": "Github hosting for binaries managed by node-pre-gyp",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/albanm/node-pre-gyp-hosting-github.git"
+  },
+  "keywords": [
+    "gyp",
+    "native",
+    "addons",
+    "node-pre-gyp",
+    "binaries",
+    "github"
+  ],
+  "author": "Alban Mouton <alban.mouton@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/albanm/node-pre-gyp-hosting-github/issues"
+  },
+  "homepage": "https://github.com/albanm/node-pre-gyp-hosting-github",
+  "devDependencies": {
+    "blanket": "^1.1.6",
+    "mocha": "^1.21.4",
+    "mocha-jshint": "0.0.9"
+  },
+  "dependencies": {
+    "request": "^2.40.0"
+  },
+  "config": {
+    "blanket": {
+      "pattern": [
+        "node-pre-gyp-hosting-github/lib"
+      ]
+    }
+  }
+}
