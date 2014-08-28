@@ -7,8 +7,10 @@ var githubHosting = require('../index.js');
 var opts = {
 	name: 'node-addon-example',
 	version: '0.1.4',
-	hosting: 'github',
-	repo: 'albanm/node-addon-example',
+	hosting: {
+		provider: 'github',
+		repo: 'albanm/node-addon-example'
+	},
 	package_name: 'package_example.txt',
 	staged_tarball: 'test/resources/package_example.txt'
 };
@@ -29,7 +31,7 @@ describe('Github hosting for node-pre-gyp', function() {
 	it('should download a package', function(callback) {
 		githubHosting.download(opts, function(err, req) {
 			should.not.exist(err);
-			req.on('data', function(data){
+			req.on('data', function(data) {
 				should.equal(data.toString('utf8'), 'package example');
 				callback();
 			});

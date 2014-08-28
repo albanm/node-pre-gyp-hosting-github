@@ -20,7 +20,7 @@ var requestOpts = function(opts, config) {
 var getReleaseFromVersion = function(opts, config, callback) {
 	var listOpts = requestOpts(opts, config);
 	listOpts.headers.Accept = 'application/vnd.github.manifold-preview';
-	listOpts.url = 'https://api.github.com/repos/' + opts.repo + '/releases';
+	listOpts.url = 'https://api.github.com/repos/' + opts.hosting.repo + '/releases';
 
 	request(listOpts, function(err, response, body) {
 		if (err) return callback(err);
