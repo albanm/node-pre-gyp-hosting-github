@@ -2,7 +2,6 @@ var fs = require('fs');
 var should = require('should');
 
 var githubHosting = require('../index.js');
-var requestOpts = require('../util').requestOpts;
 
 // extract from the result of a versioning.evaluate
 var opts = {
@@ -28,7 +27,7 @@ describe('Github hosting for node-pre-gyp', function() {
 	});
 
 	it('should download a package', function(callback) {
-		githubHosting.download(opts, config, function(err, req) {
+		githubHosting.download(opts, function(err, req) {
 			should.not.exist(err);
 			req.on('data', function(data){
 				should.equal(data.toString('utf8'), 'package example');

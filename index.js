@@ -41,7 +41,6 @@ var getReleaseFromVersion = function(opts, config, callback) {
  * Upload a tarball packaged by node-pre-gyp as an asset to a github release
  *
  * @param {Object} opts - A options object as return by node-pre-gyp's versioning.evaluate()
- * @param {Object} config - A config object as built by node-pre-gyp using the rc configuration module
  * @param {Function} callback - No particular return, just err or no err
  */
 exports.publish = function(opts, config, callback) {
@@ -125,10 +124,9 @@ exports.unpublish = function(opts, config, callback) {
  * @param {Object} opts - An options object as return by node-pre-gyp's versioning.evaluate()
  * @param {Function} callback - called with a request object (https://github.com/mikeal/request) that will be used as a stream by node-pre-gyp
  */
-exports.download = function(opts, config, callback) {
-	getReleaseFromVersion(opts, config, function(err, release) {
+exports.download = function(opts, callback) {
+	getReleaseFromVersion(opts, {}, function(err, release) {
 		if (!release) return callback(new Error('Cannot unpublish over non-existing github release'));
-
 		var asset;
 		for (var i in release.assets) {
 			if (release.assets[i].name === opts.package_name) {
@@ -138,7 +136,7 @@ exports.download = function(opts, config, callback) {
 
 		if (!asset) return callback(new Error('Pre-built binary not available for your system'));
 
-		var getOpts = requestOpts(opts, config);
+		var getOpts = requestOpts(opts, {});
 		getOpts.url = asset.url;
 		getOpts.headers.Accept = 'application/octet-stream';
 		delete getOpts.headers.Authorization;
