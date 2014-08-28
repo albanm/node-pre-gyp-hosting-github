@@ -1,3 +1,4 @@
+var fs = require('fs');
 var should = require('should');
 
 var githubHosting = require('../index.js');
@@ -18,16 +19,26 @@ var config = {
 };
 
 describe('Github hosting for node-pre-gyp', function() {
-	it('should define the 3 expected functions', function() {
-		githubHosting.publish.should.be.type('function');
-		githubHosting.unpublish.should.be.type('function');
-		githubHosting.download.should.be.type('function');
+	before(function(callback) {
+		githubHosting.unpublish(opts, config, callback);
 	});
 
-	it('should upload a package on a matching release', function(callback) {
-		githubHosting.publish(opts, config, function(err){
+	it('should publish a package', function(callback) {
+		githubHosting.publish(opts, config, callback);
+	});
+
+	it('should download a package', function(callback) {
+		githubHosting.download(opts, config, function(err, req) {
 			should.not.exist(err);
-			callback();
+			req.on('data', function(data){
+				should.equal(data.toString('utf8'), 'package example');
+				callback();
+			});
+			req.on('error', callback);
 		});
+	});
+
+	it('should unpublish a package', function(callback) {
+		githubHosting.unpublish(opts, config, callback);
 	});
 });
