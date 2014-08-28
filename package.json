@@ -4,7 +4,7 @@
   "description": "Github hosting for binaries managed by node-pre-gyp",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R spec"
+    "test": "./node_modules/.bin/mocha -t 10000 -R spec"
   },
   "repository": {
     "type": "git",
