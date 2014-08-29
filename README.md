@@ -10,7 +10,7 @@ node-pre-gyp-hosting-github
 
 *Github hosting for binaries managed by [node-pre-gyp](https://github.com/mapbox/node-pre-gyp).*
 
-This project acts as a plugin to [node-pre-gyp](https://github.com/mapbox/node-pre-gyp. It changes 'publish', 'unpublish' and 'install' commands behaviors so that packaged binaries are uploaded and downloaded from github using the [releases API](https://developer.github.com/v3/repos/releases/).
+This project acts as a plugin to [node-pre-gyp](https://github.com/mapbox/node-pre-gyp). It changes 'publish', 'unpublish' and 'install' commands behaviors so that packaged binaries are uploaded and downloaded from github using the [releases API](https://developer.github.com/v3/repos/releases/).
 
 Install
 -------
@@ -22,6 +22,7 @@ Configure
 
 Complete node-pre-gyp options in your package.json with a 'hosting' object.
 
+```json
 {
     "name": "node-addon-example",
     ...
@@ -43,6 +44,7 @@ Complete node-pre-gyp options in your package.json with a 'hosting' object.
         "install": "node-pre-gyp install --fallback-to-build"
     }
 }
+```
 
 Authenticate
 ------------
@@ -78,6 +80,6 @@ This is particularly useful to publish binaries submitted by users that don't ha
 
 To add packaged binaries to your github releases you can run:
 
-   node-pre-gyp clean build package
+    node-pre-gyp clean build package
    
 Then upload the tarball file created in your build/staged directory directly to github, in your repository's page click on 'releases' then 'Edit'.
